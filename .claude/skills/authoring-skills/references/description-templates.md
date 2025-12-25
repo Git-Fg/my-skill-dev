@@ -14,8 +14,12 @@ The `description` field is the most critical field for skill activation. Use dir
 
 For specialized file formats or domain knowledge that general-purpose systems cannot handle reliably.
 
+#### Basic Structure
+
 ```yaml
 description: MUST BE USED when analyzing [file type/domain]. Use PROACTIVELY to [action]. You are a specialized [role]. Your purpose is to [mission].
+allowed-tools: [Read, Grep, Glob] # Optional: restrict tools for safety
+compatibility: "python>=3.11"      # Optional: specify runtime requirements
 ```
 
 **Examples:**
@@ -91,7 +95,22 @@ description: Orchestrates spec-driven development workflow (Requirements → Des
 description: Orchestrates comprehensive code review process across multiple analysis dimensions (security, performance, maintainability, testing). Coordinate specialized review processes and aggregate findings into actionable feedback.
 ```
 
-### 5. Prompt Engineering / Meta Skills
+### 5. MCP Orchestrator Skills
+
+Skills that coordinate external MCP tools alongside local scripts.
+
+**Template:**
+```yaml
+description: Orchestrates database migration using Postgres MCP and local validation. Use when user asks to "migrate db" or "update schema". Requires `Postgres:query_tool` and `Postgres:schema_tool`.
+allowed-tools: Postgres:*, Bash, Read
+```
+
+**Instruction Pattern:**
+1. **Fetch State**: Use `Postgres:schema_tool` to get current state.
+2. **Plan**: Generate SQL migration file locally.
+3. **Execute**: Use `Postgres:query_tool` to apply changes.
+
+### 6. Prompt Engineering / Meta Skills
 
 Help create, review, or optimize system prompts.
 

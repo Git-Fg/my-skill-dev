@@ -1,6 +1,6 @@
 # Skill Compliance Checklist
 
-- [ ] Validation script (scripts/validate_skill.py) returns PASS
+
 
 Verify each item before finalizing a skill.
 
@@ -30,6 +30,8 @@ Verify each item before finalizing a skill.
 - [ ] `category` populated if applicable
 - [ ] `keywords` include relevant search terms
 - [ ] `license` if distributing externally
+- [ ] `allowed-tools` defined for constrained skills (e.g., Read only)
+- [ ] `compatibility` defined if dependent on specific tool versions
 
 ## Body Content (Instructions)
 
@@ -42,6 +44,7 @@ Verify each item before finalizing a skill.
 - [ ] Organized with clear sections (Overview, When to Use, Workflow, Critical Rules)
 - [ ] Contains MANDATORY/NEVER/ALWAYS directives for critical behaviors
 - [ ] Includes concrete examples where helpful
+- [ ] All file paths use **forward slashes** `/` (Unix style), never backslashes `\`
 
 ### Length
 - [ ] Under 500 lines (target: 100-200 lines)
@@ -103,6 +106,17 @@ Verify each item before finalizing a skill.
 - [ ] Content is helpful for intended tasks
 - [ ] References load when needed
 - [ ] Scripts execute correctly (if present)
+
+## Agentic & Project Standards
+
+- [ ] **No Interactive Inputs**: Scripts use CLI args, not `input()`.
+- [ ] **Path Safety**: Scripts resolve paths relative to `__file__` or receive absolute paths.
+- [ ] **Verification Step**: The workflow explicitly asks the agent to verify the script's output.
+- [ ] **Structured Output**: Scripts output clean text or JSON for easy parsing by the Agent.
+- [ ] **Dependency Check**: External dependencies are listed or checked in code.
+- [ ] **Allowed Tools**: `allowed-tools` is defined and scoped correctly (Least Privilege).
+- [ ] **Evaluation Plan**: `evaluation_plan.md` created and scenarios passed.
+- [ ] **Freedom Analysis**: Instruction style matches task fragility (Low vs High Freedom).
 
 ## Quick Validation Summary
 

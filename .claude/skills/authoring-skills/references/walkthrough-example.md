@@ -36,5 +36,5 @@ metadata:
 - **ALWAYS**: Validate output PDF is writable
 
 ### Notes
-- **MANDATORY**: Validate usage with `scripts/validate_skill.py` before sharing the skill
+- **MANDATORY**: Ensure your skill complies with `references/compliance-checklist.md` before sharing
 - **ALWAYS**: Keep large API docs in `references/` not in `SKILL.md`
