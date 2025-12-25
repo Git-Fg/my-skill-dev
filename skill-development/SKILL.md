@@ -1,7 +1,7 @@
 ---
 name: skill-development
-description: MUST BE USED when creating, improving, or reviewing Agent Skills. Use PROACTIVELY when user mentions "create a skill", "new skill", "write a skill", "improve skill", "skill description", "progressive disclosure", or skill structure. Guides through specification-compliant skill design with three-level progressive disclosure (Discovery, Activation, Execution).
-category: metaprompting
+description: MUST BE USED when creating, improving, or reviewing Agent Skills. Use PROACTIVELY when user mentions "create a skill", "new skill", "write a skill", "improve skill", "skill description", or "progressive disclosure". Guides through specification-compliant skill design with three-level progressive disclosure.
+category: meta
 keywords: skill, agent, progressive-disclosure, SKILL.md, frontmatter
 ---
 
@@ -28,6 +28,16 @@ skill-name/
 ├── references/       # Optional: documentation (loaded on-demand)
 └── assets/           # Optional: templates, resources (used in output)
 ```
+
+### Skill vs Other Constructs
+
+Skills are one of four Claude Code automation constructs. For guidance on choosing between Skills, Commands, Rules, and Agents, see `references/skill-vs-command-vs-rule-selection.md`.
+
+**Quick reference:**
+- **Skill**: Expertise that auto-applies when topics are mentioned
+- **Command**: Manually triggered repeatable actions
+- **Rule**: Always-on constraints enforced globally
+- **Agent**: Autonomous multi-step subprocess
 
 ## Skill Creation Workflow
 
@@ -117,6 +127,91 @@ After using the skill on real tasks:
 3. Move long sections to `references/`
 4. Add missing examples or scripts
 
+### 7. Integration Check
+
+After validating the skill, consider complementary constructs:
+
+**Command Integration:**
+- Should a manual command trigger this workflow?
+- Document command pattern if users need manual control
+
+**Rule Integration:**
+- Should rules enforce constraints mentioned in this skill?
+- Reference rule patterns for must-not behaviors
+
+**Agent Integration:**
+- Should agents handle autonomous subtasks?
+- Document agent delegation patterns
+
+**For complete guidance:** See `references/skill-vs-command-vs-rule-selection.md`
+
+## Example: End-to-End Skill Creation
+
+**User Query**: "I need a skill to fill PDF forms programmatically"
+
+### Step 1 - Understand Use Cases
+- **User queries**: "fill PDF form", "populate PDF fields", "PDF form automation"
+- **Domain**: PDF form manipulation, field extraction, data population
+- **Expertise**: PDF library (pdflib), form field types, validation
+
+### Step 2 - Plan Resources
+- `scripts/extract_fields.py` - Extract form field metadata
+- `scripts/fill_form.py` - Populate fields with data
+- `references/pdflib-api.md` - Library documentation
+- `references/field-types.md` - Form field reference
+
+### Step 3 - Write Frontmatter
+```yaml
+---
+name: pdf-form-filler
+description: Fills PDF forms programmatically by extracting form fields and populating with data. Use when creating fillable PDF forms or filling existing forms with user data. Supports field validation, dropdown population, checkbox handling, and signature placeholder insertion.
+category: pdf-processing
+keywords: pdf, form, fill, populate, acroform
+---
+```
+
+### Step 4 - Write SKILL.md Body
+```markdown
+# PDF Form Filler
+
+Automates PDF form field extraction and data population.
+
+## Overview
+Extracts form field metadata from PDF files and populates fields with provided data values. Handles text fields, checkboxes, dropdowns, and signature placeholders.
+
+## When to Use
+- User mentions "fill PDF form" or "populate PDF"
+- Creating automated form filling workflows
+- Batch processing PDF forms with data
+
+## Workflow
+1. Extract fields using `scripts/extract_fields.py`
+2. Map data to field names (see `references/field-types.md`)
+3. Populate using `scripts/fill_form.py`
+4. Validate required fields are filled
+
+## Critical Rules
+**MANDATORY**: Read `references/pdflib-api.md` for field type handling
+**NEVER**: Assume field naming - always extract first
+**ALWAYS**: Validate output PDF is writable
+
+## Resources
+- `scripts/extract_fields.py` - Field extraction utility
+- `scripts/fill_form.py` - Form population script
+- `references/pdflib-api.md` - Complete API documentation
+- `references/field-types.md` - Field type reference
+```
+
+### Step 5 - Validate
+- [x] Frontmatter has `name` and `description`
+- [x] Description uses directive language ("Use when")
+- [x] Body uses imperative form, not second person
+- [x] Body < 500 lines
+- [x] All referenced files exist or are planned
+
+### Step 6 - Iterate
+After testing: add validation patterns, move API details to `references/`, strengthen triggers for "acroform" queries.
+
 ## Critical Rules
 
 **MANDATORY:**
@@ -144,4 +239,5 @@ After using the skill on real tasks:
 | `references/description-templates.md` | Optimal description examples by skill type |
 | `references/compliance-checklist.md` | Full validation checklist |
 | `references/progressive-disclosure.md` | Deep dive on three-level loading |
+| `references/skill-vs-command-vs-rule-selection.md` | Decision framework: Skill vs Command vs Rule vs Agent |
 | `references/skill-creator-original.md` | Legacy Anthropic skill-creator reference |
