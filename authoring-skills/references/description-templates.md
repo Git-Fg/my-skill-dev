@@ -12,7 +12,7 @@ The `description` field is the most critical field for skill activation. Use dir
 
 ### 1. Domain-Specific Mandatory Skills (MUST BE USED)
 
-For specialized file formats or domain knowledge that general agents cannot handle reliably.
+For specialized file formats or domain knowledge that general-purpose systems cannot handle reliably.
 
 ```yaml
 description: MUST BE USED when analyzing [file type/domain]. Use PROACTIVELY to [action]. You are a specialized [role]. Your purpose is to [mission].
@@ -75,7 +75,7 @@ description: Generates Excel spreadsheets with complex formatting, formulas, cha
 
 ### 4. Workflow Orchestration Skills
 
-Coordinate multi-step processes or subagent coordination.
+Coordinate multi-step processes or subprocess coordination.
 
 ```yaml
 description: Orchestrates [workflow]. Coordinate [components]. Use when [trigger]. MANDATORY: [critical behavior].
@@ -85,10 +85,10 @@ description: Orchestrates [workflow]. Coordinate [components]. Use when [trigger
 
 ```yaml
 # Spec-Driven Development
-description: Orchestrates spec-driven development workflow (Requirements → Design → Tasks → Implementation). Coordinate subagents through approval gates for enterprise-grade feature planning. Use when user mentions "requirements", "design doc", "implementation plan", or needs structured feature development. MANDATORY: Never create documents directly; always launch appropriate subagents.
+description: Orchestrates spec-driven development workflow (Requirements → Design → Tasks → Implementation). Coordinate subprocesses through approval gates for enterprise-grade feature planning. Use when user mentions "requirements", "design doc", "implementation plan", or needs structured feature development. MANDATORY: Never create documents directly; always launch appropriate subprocesses.
 
 # Code Review Pipeline
-description: Orchestrates comprehensive code review process across multiple analysis dimensions (security, performance, maintainability, testing). Coordinate specialized review agents and aggregate findings into actionable feedback.
+description: Orchestrates comprehensive code review process across multiple analysis dimensions (security, performance, maintainability, testing). Coordinate specialized review processes and aggregate findings into actionable feedback.
 ```
 
 ### 5. Prompt Engineering / Meta Skills
@@ -96,32 +96,32 @@ description: Orchestrates comprehensive code review process across multiple anal
 Help create, review, or optimize system prompts.
 
 ```yaml
-description: Use this agent when the user needs to [operations]. This includes [scope]. Examples: "[example 1]", "[example 2]". You are [expertise].
+description: Use this skill when the user needs to [operations]. This includes [scope]. Examples: "[example 1]", "[example 2]". You are [expertise].
 ```
 
 **Examples:**
 
 ```yaml
 # Prompt Engineer
-description: Use this agent when the user needs to create, modify, review, or optimize system prompts for AI agents. This includes requests to improve prompt effectiveness, add specific behaviors, refine instructions, or evaluate existing prompts for clarity and performance. Examples: "review this customer service agent prompt", "create a system prompt for summarizing documentation". You are an expert prompt engineer specializing in crafting, reviewing, and optimizing system prompts.
+description: Use this skill when the user needs to create, modify, review, or optimize system prompts. This includes requests to improve prompt effectiveness, add specific behaviors, refine instructions, or evaluate existing prompts for clarity and performance. Examples: "review this customer service prompt", "create a system prompt for summarizing documentation". You are an expert prompt engineer specializing in crafting, reviewing, and optimizing system prompts.
 
 # Skill Creator
-description: MUST BE USED when creating, improving, or reviewing Agent Skills. Use PROACTIVELY when user mentions "create a skill", "new skill", "write a skill", "improve skill". Guides through specification-compliant skill design with three-level progressive disclosure.
+description: MUST BE USED when creating, improving, or reviewing Skills. Use PROACTIVELY when user mentions "create a skill", "new skill", "write a skill", "improve skill". Guides through specification-compliant skill design with three-level progressive disclosure.
 ```
 
 ## Directive Strength Reference
 
 | Phrase | Impact | Use When |
 |:-------|:-------|:---------|
-| `MUST BE USED` | Agent **always** activates when trigger matches | Domain-specific tasks requiring expertise |
-| `Use PROACTIVELY` | Agent **automatically** activates without waiting | Quality assurance, validation, review tasks |
-| `Use when` | Agent activates **on relevant mention** | General-purpose skills, optional tools |
-| `Should be used` | **WEAK** - agent may skip | **AVOID** |
+| `MUST BE USED` | Skill **always** activates when trigger matches | Domain-specific tasks requiring expertise |
+| `Use PROACTIVELY` | Skill **automatically** activates without waiting | Quality assurance, validation, review tasks |
+| `Use when` | Skill activates **on relevant mention** | General-purpose skills, optional tools |
+| `Should be used` | **WEAK** - skill may skip | **AVOID** |
 
 ## Anti-Patterns (Avoid These)
 
 ```yaml
-# ❌ Too vague - agent can't determine relevance
+# ❌ Too vague - the runtime can't determine relevance
 description: Helps with PDF files.
 
 # ❌ First person - violates spec

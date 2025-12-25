@@ -1,25 +1,25 @@
 # Progressive Disclosure Design
 
-Skills use progressive disclosure to manage context efficiently. This principle ensures agents remain fast and responsive while having access to extensive domain knowledge when needed.
+Skills use progressive disclosure to manage context efficiently. This principle ensures runtimes remain fast and responsive while having access to extensive domain knowledge when needed.
 
 ## Three-Level Loading System
 
 ### Level 1: Discovery (~100-200 tokens)
 
-At startup or when browsing available skills, agents load only the frontmatter metadata:
+At startup or when browsing available skills, runtimes/loaders may initially load only the frontmatter metadata:
 
 ```yaml
 name: dynamo-xml-analyzer
 description: MUST BE USED when analyzing Dynamo (.dyn) XML files...
 ```
 
-**Purpose:** Enable the agent to determine which skills are relevant to the current task without loading full instructions.
+**Purpose:** Enable the runtime to determine which skills are relevant to the current task without loading full instructions.
 
 **Best Practice:** The `description` field must contain sufficient keywords and trigger phrases to enable accurate matching.
 
 ### Level 2: Activation (<5000 tokens recommended)
 
-When a task matches a skill's description, the agent loads the full `SKILL.md` body content:
+When a task matches a skill's description, the runtime loads the full `SKILL.md` body content:
 
 ```markdown
 # Dynamo XML Analyzer
@@ -42,7 +42,7 @@ When a task matches a skill's description, the agent loads the full `SKILL.md` b
 
 ### Level 3: Execution (on-demand, unlimited)
 
-During execution, the agent loads or uses bundled resources as needed:
+During execution, the runtime or executor loads or uses bundled resources as needed:
 
 - **scripts/** - Executed without loading into context (Python, Bash, etc.)
 - **references/** - Loaded only when referenced in instructions
@@ -56,7 +56,7 @@ During execution, the agent loads or uses bundled resources as needed:
 
 | Without Progressive Disclosure | With Progressive Disclosure |
 |:-------------------------------|:----------------------------|
-| Agent loads all skills at startup → Slow startup | Agent loads only metadata → Fast startup |
+| Loading all skills at startup → Slow startup | Loading only metadata at startup → Fast startup |
 | All instructions in context → Token bloat | Instructions loaded on-demand → Efficient token usage |
 | Reference docs always loaded | Reference docs loaded only when needed |
 | Hard to scale beyond ~10 skills | Can support 100+ skills efficiently |
@@ -154,11 +154,11 @@ SKILL.md → references/schema.md
 SKILL.md → references/intro.md → references/details.md
 ```
 
-Agents may use partial reading strategies that miss nested context.
+Runtimes may use partial reading strategies that miss nested context.
 
 ## Large Reference Handling (>10k words)
 
-Include grep patterns in SKILL.md to help agents find relevant sections:
+Include grep patterns in SKILL.md to help find relevant sections:
 
 ```markdown
 ## Database Queries

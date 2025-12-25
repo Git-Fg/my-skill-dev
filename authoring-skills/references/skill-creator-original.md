@@ -1,10 +1,7 @@
----
-name: skill-creator
-description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.
-license: Complete terms in LICENSE.txt
----
+# Deprecated: removed legacy skill-creator-original
 
-# Skill Creator
+This file has been deprecated and removed to avoid redundancy. The authoritative guidance is now available in `authoring-skills/SKILL.md` and `authoring-skills/references/walkthrough-example.md`. Please refer to `scripts/validate_skill.py` and `references/compliance-checklist.md` for automation-based validation and checklist guidance.
+
 
 This skill provides guidance for creating effective skills.
 
@@ -12,7 +9,7 @@ This skill provides guidance for creating effective skills.
 
 Skills are modular, self-contained packages that extend Claude's capabilities by providing
 specialized knowledge, workflows, and tools. Think of them as "onboarding guides" for specific
-domains or tasks—they transform Claude from a general-purpose agent into a specialized agent
+domains or tasks—they transform Claude from a general-purpose assistant into a specialized capability
 equipped with procedural knowledge that no model can fully possess.
 
 ### What Skills Provide
@@ -135,22 +132,9 @@ At this point, it is time to actually create the skill.
 
 Skip this step only if the skill being developed already exists, and iteration or packaging is needed. In this case, continue to the next step.
 
-When creating a new skill from scratch, always run the `init_skill.py` script. The script conveniently generates a new template skill directory that automatically includes everything a skill requires, making the skill creation process much more efficient and reliable.
+To initialize a new skill, create the directory structure manually or copy an existing template. At minimum, create a folder named for the skill, a `SKILL.md` with proper frontmatter, and optional `scripts/`, `references/`, and `assets/` subdirectories.
 
-Usage:
-
-```bash
-scripts/init_skill.py <skill-name> --path <output-directory>
-```
-
-The script:
-
-- Creates the skill directory at the specified path
-- Generates a SKILL.md template with proper frontmatter and TODO placeholders
-- Creates example resource directories: `scripts/`, `references/`, and `assets/`
-- Adds example files in each directory that can be customized or deleted
-
-After initialization, customize or remove the generated SKILL.md and example files as needed.
+For a concrete example and frontmatter template, see `references/walkthrough-example.md`. After creating the initial files, customize or remove example content as needed.
 
 ### Step 4: Edit the Skill
 

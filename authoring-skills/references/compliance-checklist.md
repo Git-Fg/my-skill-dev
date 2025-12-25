@@ -1,5 +1,7 @@
 # Skill Compliance Checklist
 
+- [ ] Validation script (scripts/validate_skill.py) returns PASS
+
 Verify each item before finalizing a skill.
 
 ## Frontmatter (Metadata)
@@ -21,7 +23,7 @@ Verify each item before finalizing a skill.
 - [ ] Avoids weak language ("should be used", "recommended for")
 - [ ] Specifies *what* the skill does
 - [ ] Specifies *when* to use it (trigger conditions)
-- [ ] Contains clear trigger keywords for agent matching
+- [ ] Contains clear trigger keywords for skill matching
 - [ ] Under 1024 characters
 
 ### Optional Fields
